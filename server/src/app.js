@@ -30,7 +30,8 @@ app.get('/api/health', (req, res) => {
 // Rotas de autenticação
 app.use('/api/auth', require('./routes/authRoutes'));
 
-// Rotas de agendamento serão montadas aqui nos próximos blocos
+app.use('/api/services', require('./routes/serviceRoutes'));
+app.use('/api/appointments', require('./routes/appointmentRoutes'));
 
 // 404: rota não encontrada
 app.use((req, res) => {
