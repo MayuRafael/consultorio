@@ -1,0 +1,159 @@
+:root {
+  --verde-principal: #2E7D5B;
+  --verde-escuro: #14452F;
+  --verde-claro: #E8F5EE;
+  --texto: #1F2A27;
+  --texto-secundario: #5B6B66;
+  --borda: #D5E0DB;
+  --fundo: #F7FAF8;
+  --branco: #FFFFFF;
+  --erro: #B42318;
+  --erro-claro: #FDECEA;
+  --ocupado: #8A9590;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--texto);
+  background: var(--fundo);
+  line-height: 1.5;
+}
+
+a { color: var(--verde-principal); }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Barra superior */
+.navbar {
+  background: var(--verde-escuro);
+  color: var(--branco);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 16px;
+}
+.navbar a, .navbar .menu a { color: var(--branco); text-decoration: none; opacity: 0.9; }
+.navbar a.active { opacity: 1; text-decoration: underline; }
+.navbar .marca { font-weight: 700; font-size: 1.1rem; opacity: 1; }
+.navbar .menu { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
+.navbar .usuario { font-size: 0.9rem; opacity: 0.85; }
+
+/* Cartões e títulos */
+.card {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+h1 { font-size: 1.5rem; margin: 0 0 16px; }
+h2 { font-size: 1.2rem; margin: 0 0 12px; color: var(--verde-escuro); }
+
+/* Formulários */
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.campo label { font-weight: 500; font-size: 0.95rem; }
+input, select, textarea {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--branco);
+  color: var(--texto);
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--verde-principal);
+  outline-offset: 1px;
+}
+.grade-form {
+  display: grid;
+  gap: 0 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Botões */
+.btn {
+  font: inherit;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: var(--verde-principal);
+  color: var(--branco);
+}
+.btn:hover { filter: brightness(0.92); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-secundario { background: transparent; color: var(--branco); border-color: rgba(255,255,255,0.5); }
+.btn-perigo { background: var(--erro); }
+.btn-contorno { background: var(--branco); color: var(--verde-principal); border-color: var(--verde-principal); }
+
+/* Mensagens */
+.alerta { padding: 12px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 0.95rem; }
+.alerta-erro { background: var(--erro-claro); color: var(--erro); border: 1px solid var(--erro); }
+.alerta-sucesso { background: var(--verde-claro); color: var(--verde-escuro); border: 1px solid var(--verde-principal); }
+
+/* Selos de status: sempre com texto, nunca só cor */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.badge-agendado { background: var(--verde-claro); color: var(--verde-escuro); }
+.badge-cancelado { background: var(--erro-claro); color: var(--erro); }
+
+/* Listas */
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--borda);
+}
+.item:last-child { border-bottom: none; }
+.item .detalhe { color: var(--texto-secundario); font-size: 0.9rem; }
+.acoes { display: flex; gap: 8px; }
+
+/* Grade de horários */
+.horarios { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+.horario {
+  padding: 10px 0;
+  border: 1px solid var(--verde-principal);
+  border-radius: 8px;
+  background: var(--branco);
+  color: var(--verde-escuro);
+  cursor: pointer;
+  font: inherit;
+}
+.horario.selecionado { background: var(--verde-principal); color: var(--branco); }
+
+/* Carregamento */
+.spinner {
+  width: 32px;
+  height: 32px;
+  margin: 40px auto;
+  border: 3px solid var(--verde-claro);
+  border-top-color: var(--verde-principal);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* Telas pequenas */
+@media (max-width: 640px) {
+  .container { padding: 16px 12px; }
+  .navbar { flex-direction: column; align-items: flex-start; }
+  .item { flex-direction: column; align-items: flex-start; }
+}
