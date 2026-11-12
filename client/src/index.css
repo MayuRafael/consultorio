@@ -157,3 +157,34 @@ input:focus, select:focus, textarea:focus {
   .navbar { flex-direction: column; align-items: flex-start; }
   .item { flex-direction: column; align-items: flex-start; }
 }
+
+/* Calendário do mês */
+.calendario { border: 1px solid var(--borda); border-radius: 12px; padding: 12px; background: var(--branco); }
+.cal-cabecalho { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--verde-escuro); }
+.cal-cabecalho .btn { padding: 4px 12px; font-size: 1.1rem; }
+.cal-grade { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-dia-semana { text-align: center; font-size: 0.8rem; color: var(--texto-secundario); padding: 4px 0; }
+.dia {
+  font: inherit;
+  min-height: 52px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  background: var(--branco);
+  color: var(--texto);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+}
+.dia:hover:not(:disabled) { border-color: var(--verde-principal); }
+.dia:disabled { opacity: 0.35; cursor: not-allowed; }
+.dia small { font-size: 0.68rem; color: var(--verde-escuro); }
+.dia.com-consultas { background: var(--verde-claro); }
+.dia.selecionado { background: var(--verde-principal); color: var(--branco); border-color: var(--verde-principal); }
+.dia.selecionado small { color: var(--branco); }
+.legenda { font-size: 0.85rem; color: var(--texto-secundario); margin-top: 8px; }
+.horario:disabled { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
+@media (max-width: 640px) { .dia { min-height: 44px; } .dia small { display: none; } }
