@@ -188,3 +188,48 @@ input:focus, select:focus, textarea:focus {
 .legenda { font-size: 0.85rem; color: var(--texto-secundario); margin-top: 8px; }
 .horario:disabled { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
 @media (max-width: 640px) { .dia { min-height: 44px; } .dia small { display: none; } }
+
+/* Telas de entrada (login e cadastro) */
+.auth-pagina { min-height: 100vh; display: grid; grid-template-columns: 1fr; }
+.auth-painel {
+  background: linear-gradient(160deg, var(--verde-escuro) 0%, var(--verde-principal) 100%);
+  color: var(--branco);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+.auth-marca { font-weight: 800; font-size: 2rem; letter-spacing: 0.2px; line-height: 1.1; }
+.auth-chamada { color: var(--branco); font-size: 1.6rem; margin: 8px 0 0; }
+.auth-texto { margin: 0; opacity: 0.9; max-width: 420px; }
+.auth-ilustracao { display: none; width: 100%; max-width: 360px; margin-top: 16px; }
+.auth-beneficios { margin: 8px 0 0; padding-left: 20px; display: none; opacity: 0.92; }
+.auth-beneficios li { margin-bottom: 6px; }
+.auth-form-lado { display: flex; align-items: center; justify-content: center; padding: 32px 16px; background: var(--branco); }
+.auth-caixa { width: 100%; max-width: 380px; }
+.auth-caixa h1 { margin-bottom: 6px; }
+.auth-subtitulo { color: var(--texto-secundario); margin: 0 0 24px; }
+.auth-rodape { margin-top: 20px; text-align: center; color: var(--texto-secundario); }
+.btn-bloco { width: 100%; padding: 12px; font-size: 1rem; }
+.auth-suporte {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.92rem;
+  opacity: 0.92;
+}
+.auth-suporte strong { font-size: 1rem; margin-bottom: 4px; }
+
+@media (min-width: 860px) {
+  .auth-pagina { grid-template-columns: 1.05fr 1fr; }
+  .auth-painel { padding: 56px; }
+  .auth-chamada { font-size: 2.2rem; }
+  .auth-marca { font-size: 2.6rem; }
+  .auth-ilustracao { display: block; }
+  .auth-beneficios { display: block; }
+  .auth-form-lado { padding: 56px 40px; }
+}
