@@ -60,3 +60,37 @@ describe('Rotas protegidas sem login', () => {
     expect(res.status).toBe(401);
   });
 });
+
+describe('Período de horários ocupados', () => {
+  const { ocupadosQuerySchema } = require('../src/validators/appointmentValidator');
+  const dia = 24 * 60 * 60 * 1000;
+
+  test('aceita um período válido de um mês', () => {
+    const inicio = new Date('2026-11-01T00:00:00-04:00').toISOString();
+    const fim = new Date('2026-12-01T00:00:00-04:00').toISOString();
+    const { error } = ocupadosQuerySchema.validate({ inicio, fim });
+    expect(error).toBeUndefined();
+  });
+
+  test('rejeita fim anterior ao início', () => {
+    const inicio = new Date('2026-11-10T00:00:00Z').toISOString();
+    const fim = new Date('2026-11-01T00:00:00Z').toISOString();
+    const { error } = ocupadosQuerySchema.validate({ inicio, fim });
+    expect(error.details[0].message).toMatch(/depois do início/);
+  });
+
+  test('rejeita período maior que 62 dias', () => {
+    const inicio = new Date('2026-11-01T00:00:00Z');
+    const fim = new Date(inicio.getTime() + 90 * dia);
+    const { error } = ocupadosQuerySchema.validate({
+      inicio: inicio.toISOString(),
+      fim: fim.toISOString(),
+    });
+    expect(error.details[0].message).toMatch(/62 dias/);
+  });
+
+  test('GET /api/appointments/ocupados sem login responde 401', async () => {
+    const res = await request(app).get('/api/appointments/ocupados?inicio=2026-11-01T00:00:00Z&fim=2026-12-01T00:00:00Z');
+    expect(res.status).toBe(401);
+  });
+});

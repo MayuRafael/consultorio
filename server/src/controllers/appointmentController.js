@@ -132,3 +132,25 @@ exports.remove = async (req, res, next) => {
     next(err);
   }
 };
+
+// Horários ocupados em um período. Não expõe nomes de pacientes: só as datas.
+exports.ocupados = async (req, res, next) => {
+  try {
+    const { ocupadosQuerySchema } = require('../validators/appointmentValidator');
+    const { error, value } = ocupadosQuerySchema.validate(req.query, { stripUnknown: true });
+    if (error) {
+      return res.status(400).json({ erro: 'Período inválido', detalhes: error.details.map((d) => d.message) });
+    }
+
+    const agendamentos = await Appointment.find({
+      status: 'agendado',
+      date: { $gte: value.inicio, $lt: value.fim },
+    })
+      .select('date -_id')
+      .sort({ date: 1 });
+
+    return res.status(200).json(agendamentos.map((a) => a.date.toISOString()));
+  } catch (err) {
+    next(err);
+  }
+};

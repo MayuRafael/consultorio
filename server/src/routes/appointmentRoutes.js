@@ -13,6 +13,7 @@ router.use(isAuth);
 // Qualquer usuário logado: agenda, lista os próprios (Admin vê todos) e cancela
 router.post('/', validate(appointmentSchema), appointmentController.create);
 router.get('/', appointmentController.list);
+router.get('/ocupados', appointmentController.ocupados);
 router.get('/:id', appointmentController.getOne);
 router.patch('/:id/cancelar', appointmentController.cancel);
 
