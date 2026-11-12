@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { mensagemDeErro } from '../services/api';
+import AuthLayout from '../components/AuthLayout';
 
 export default function Login() {
   const { login } = useAuth();
@@ -26,9 +27,11 @@ export default function Login() {
   }
 
   return (
-    <div className="card" style={{ maxWidth: 420, margin: '0 auto' }}>
-      <h1>Entrar</h1>
-
+    <AuthLayout
+      titulo="Bem-vindo de volta"
+      subtitulo="Entre para acompanhar e agendar suas consultas."
+      rodape={<>Não tem conta? <Link to="/cadastro">Cadastre-se</Link></>}
+    >
       {erro && <div className="alerta alerta-erro" role="alert">{erro}</div>}
 
       <form onSubmit={enviar}>
@@ -40,14 +43,10 @@ export default function Login() {
           <label htmlFor="senha">Senha</label>
           <input id="senha" type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
         </div>
-        <button className="btn" type="submit" disabled={enviando} style={{ width: '100%' }}>
+        <button className="btn btn-bloco" type="submit" disabled={enviando}>
           {enviando ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
-
-      <p style={{ marginTop: 16, textAlign: 'center' }}>
-        Não tem conta? <Link to="/cadastro">Cadastre-se</Link>
-      </p>
-    </div>
+    </AuthLayout>
   );
 }

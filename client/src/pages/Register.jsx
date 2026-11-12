@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { mensagemDeErro } from '../services/api';
+import AuthLayout from '../components/AuthLayout';
 
 export default function Register() {
   const { register } = useAuth();
@@ -28,9 +29,11 @@ export default function Register() {
   }
 
   return (
-    <div className="card" style={{ maxWidth: 420, margin: '0 auto' }}>
-      <h1>Criar conta</h1>
-
+    <AuthLayout
+      titulo="Criar conta"
+      subtitulo="Leva menos de um minuto. Depois é só entrar e agendar."
+      rodape={<>Já tem conta? <Link to="/login">Entre aqui</Link></>}
+    >
       {erro && <div className="alerta alerta-erro" role="alert">{erro}</div>}
 
       <form onSubmit={enviar}>
@@ -46,14 +49,10 @@ export default function Register() {
           <label htmlFor="senha">Senha (mínimo 8 caracteres)</label>
           <input id="senha" type="password" minLength={8} value={senha} onChange={(e) => setSenha(e.target.value)} required />
         </div>
-        <button className="btn" type="submit" disabled={enviando} style={{ width: '100%' }}>
+        <button className="btn btn-bloco" type="submit" disabled={enviando}>
           {enviando ? 'Cadastrando...' : 'Cadastrar'}
         </button>
       </form>
-
-      <p style={{ marginTop: 16, textAlign: 'center' }}>
-        Já tem conta? <Link to="/login">Entre aqui</Link>
-      </p>
-    </div>
+    </AuthLayout>
   );
 }
